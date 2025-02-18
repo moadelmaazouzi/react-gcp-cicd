@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { AppBar, Toolbar, IconButton, Typography, Button, Drawer, List, ListItem, ListItemButton, ListItemText, Box, Divider } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -136,7 +136,7 @@ export default ResponsiveNavbar;
 
 import { Menu, MenuItem } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import LoginIcon from "@mui/icons-material/Login";
+
 import LogoutIcon from "@mui/icons-material/Logout";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import SignInModal from "./Users/SignIn";

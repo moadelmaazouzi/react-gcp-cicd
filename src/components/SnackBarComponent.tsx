@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Snackbar, Alert } from '@mui/material';
 
 const SnackbarComponent = () => {

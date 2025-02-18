@@ -1,5 +1,5 @@
 
-import React from 'react'
+
 import { Container, Grid, Typography, Box, Button } from "@mui/material";
 
 
@@ -37,7 +37,7 @@ const LandingPage = () => {
         <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2, color: "var(--text-secondary)" }}>
           Profitez de:
         </Typography>
-        <ul>
+        <ul >
           <li style={{ color: "#16A085" }}>Transactions sécurisées</li>
           <li style={{ color: "#16A085" }}>Plateforme facile à utiliser</li>
           <li style={{ color: "#16A085" }}>Support client disponible 24/7</li>
