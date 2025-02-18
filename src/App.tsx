@@ -35,7 +35,7 @@ function App() {
   return (
     <BrowserRouter>
       <ResponsiveNavbar></ResponsiveNavbar>
-      
+      <br />  
 
       <Routes>
         <Route path='/home' element={<Home />} />
