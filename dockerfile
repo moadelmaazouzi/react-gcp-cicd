@@ -20,7 +20,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copier le build généré par React dans le répertoire où Nginx s'attend à trouver les fichiers statiques
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Exposer le port 80 pour que l'application soit accessible
 EXPOSE 9093
