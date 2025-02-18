@@ -1,0 +1,44 @@
+name: Deploy React App to Google Cloud Run
+
+on:
+  push:
+    branches:
+      - moadbranch # Déclenche le workflow sur un push sur la branche principale
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Étape 1: Vérifier le code source du dépôt
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Étape 2: Configurer Google Cloud CLI
+      - name: Set up Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: spring-boot-gcp-project-449216  # Remplacer par votre ID de projet GCP
+          credentials_json: ${{ secrets.GCP_SA_KEY }}  # Utilisation de la clé de service dans les secrets GitHub
+
+      # Étape 3: Authentifier Docker avec Google Cloud
+      - name: Authenticate Docker to Google Cloud
+        run: gcloud auth configure-docker africa-south1-docker.pkg.dev  # Authentification Docker avec GCP
+
+      # Étape 4: Construire l'image Docker
+      - name: Build Docker image
+        run: |
+          docker build -t africa-south1-docker.pkg.dev/spring-boot-gcp-project-449216/my-docker-repo/reactappcicd:latest .  # Créer l'image Docker
+
+      # Étape 5: Pousser l'image Docker vers Artifact Registry
+      - name: Push Docker image to Artifact Registry
+        run: |
+          docker push africa-south1-docker.pkg.dev/spring-boot-gcp-project-449216/my-docker-repo/reactappcicd:latest  # Push de l'image vers Artifact Registry
+
+      # Étape 6: Déployer sur Google Cloud Run
+      - name: Deploy to Google Cloud Run
+        run: |
+          gcloud run deploy react-app --image africa-south1-docker.pkg.dev/spring-boot-gcp-project-449216/my-docker-repo/reactappcicd:latest \
+            --platform managed \
+            --region africa-south1 \  # Modifier la région selon votre préférence (par exemple, us-central1 ou europe-west1)
+            --allow-unauthenticated  # Permet un accès non authentifié
